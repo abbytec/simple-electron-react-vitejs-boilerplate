@@ -1,0 +1,47 @@
+{
+  "productName": "Hospital app",
+  "name": "front-end-hospital",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "main": "electron/electron.cjs",
+  "homepage": "./src",
+  "scripts": {
+    "dev": "vite --host",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "electron-dev": "concurrently -k \"npm run dev\" \"npm:start-electron\"",
+    "start-electron": "set ELECTRON_START_URL=http://localhost:5173 && electron .",
+    "build-electron": "npm run build & robocopy electron build/electron /S",
+    "package": "npm run build-electron && electron-builder build --win -c.extraMetadata.main=build/electron/electron.cjs --publish never"
+  },
+  "dependencies": {
+    "electron-is-dev": "^2.0.0",
+    "fix-esm": "^1.0.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.22",
+    "@types/react-dom": "^18.0.7",
+    "@vitejs/plugin-react": "^2.2.0",
+    "concurrently": "^7.5.0",
+    "electron": "^21.2.2",
+    "electron-builder": "^23.6.0",
+    "electron-is-dev": "^2.0.0",
+    "typescript": "^4.6.4",
+    "vite": "^3.2.0",
+    "wait-on": "^6.0.1"
+  },
+  "build": {
+  "files": [
+    "build/**/*",
+    "node_modules/**/*"
+  ],
+  "publish": {
+    "provider": "github",
+    "repo": "electron-cra-example",
+    "owner": "johndyer24"
+  }
+}
+}
